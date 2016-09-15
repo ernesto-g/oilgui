@@ -1,0 +1,129 @@
+<html>
+		<head>
+		<script src="./view.js" ></script>
+		<script src="./entities/Task.js" ></script>
+		<script src="./entities/Resource.js" ></script>
+		<script src="./entities/Event.js" ></script>
+		<script src="./controller.js" ></script>
+		
+	</head>
+
+	<body>
+		<button onclick="saveAll();">Guardar todo</button>
+		
+		<h2>Propiedades del OS</h2>
+		<table style="">
+		  <tr>
+			<th>Propiedad</th>
+			<th>Valor</th> 
+		  </tr>
+		  <tr>
+			<td>STATUS</td>
+			<td>
+				<select>
+				  <option value="STANDARD">STANDARD</option>
+				  <option value="-">-</option>
+				</select>
+			</td> 
+		  </tr>
+		  <tr>
+			<td>STARTUPHOOK</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>		
+		  <tr>
+			<td>ERRORHOOK</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>	
+		  <tr>
+			<td>SHUTDOWNHOOK</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>	
+		  <tr>
+			<td>PRETASKHOOK</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>	
+		  <tr>
+			<td>POSTTASKHOOK</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>		
+		  <tr>
+			<td>USEGETSERVICEID</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>	
+		  <tr>
+			<td>USEPARAMETERACCESS</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>	
+		  <tr>
+			<td>USERESSCHEDULER</td>
+			<td>
+				<select>
+				  <option value="STANDARD">TRUE</option>
+				  <option value="-">FALSE</option>
+				</select>
+			</td> 
+		  </tr>		  
+		</table>
+		
+		<h2>Resources</h2>
+		<button onclick="addResource();">Agregar Resource</button>
+		<table style="border: 1px solid red;" id="tableResources">
+		  <tr>
+			<th>Resource</th>
+		  </tr>
+		</table>
+
+		<h2>Events</h2>
+		<button onclick="addEvent();">Agregar Event</button>
+		<table style="border: 1px solid red;" id="tableEvents">
+		  <tr>
+			<th>Event</th>
+		  </tr>
+		</table>
+		
+		<h2>Tareas</h2>
+		<button onclick="addTask();">Agregar Tarea</button>
+		<table style="border: 1px solid red;" id="tableTasks">
+		  <tr>
+			<th>Tarea</th>
+			<th>Propiedades</th> 
+		  </tr>
+		</table>
+		
+	</body>
+</html>
