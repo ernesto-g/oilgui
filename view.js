@@ -2,7 +2,7 @@
 
 function View()
 {
-	
+	this.uniqueIdCounter=0;
 };
 
 View.prototype.insertTaskInTable = function(idTask)
@@ -20,8 +20,8 @@ View.prototype.insertTaskInTable = function(idTask)
 	"</br><label>SCHEDULE: </label><select><option value=''>NON</option><option value=''>FULL</option></select> "+
 	"</br><label>ACTIVATION: </label><input type='number'></input> "+
 	"</br><label>AUTOSTART: </label><select><option value=''>TRUE</option><option value=''>FALSE</option></select> "+
-	"</br><label>RESOURCES: <button onclick='addResourceToTask("+idTask+");'>+</button> <ul id='res_list_task_"+idTask+"' ></ul>" +
-	"</br><label>EVENTS: <button onclick='addEventToTask("+idTask+");'>+</button> <ul id='event_list_task_"+idTask+"' ></ul>" +
+	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");'>+</button> <ul id='res_list_task_"+idTask+"' ></ul>" +
+	"</br><label>EVENTS: </label><button onclick='addEventToTask("+idTask+");'>+</button> <ul id='event_list_task_"+idTask+"' ></ul>" +
 	"</div>";
 	
 	var cell1 = row.insertCell(2);
@@ -115,15 +115,18 @@ View.prototype.addResource = function(idTask,resources)
 		return;
 	var list = document.getElementById("res_list_task_"+idTask);
 	var li = document.createElement("li");
+	li.id = "item_res_in_list_"+this.uniqueIdCounter;
 	var cmb = "<select>";
 	for(var i in resources)
 	{
 		var res = resources[i];
 		cmb+="<option value='"+res.getId()+"'>"+res.getName()+"</option>";
 	}
-	cmb+="</select>";
+	cmb+="</select><button onclick=\"deleteResourceFromList('"+"item_res_in_list_"+this.uniqueIdCounter+"');\">X</button>";
 	li.innerHTML = cmb;
 	list.appendChild(li);
+
+	this.uniqueIdCounter++;
 };
 
 /*
@@ -135,15 +138,19 @@ View.prototype.addEvent = function(idTask,events)
 		return;
 	var list = document.getElementById("event_list_task_"+idTask);
 	var li = document.createElement("li");
+	li.id = "item_ev_in_list_"+this.uniqueIdCounter;
+
 	var cmb = "<select>";
 	for(var i in events)
 	{
 		var r = events[i];
 		cmb+="<option value=''>"+r+"</option>";
 	}
-	cmb+="</select>";
+	cmb+="</select><button onclick=\"deleteEventFromList('"+"item_ev_in_list_"+this.uniqueIdCounter+"');\">X</button>";
 	li.innerHTML = cmb;
 	list.appendChild(li);
+
+	this.uniqueIdCounter++;
 };
 
 /*
@@ -195,7 +202,16 @@ View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagRe
 	}
 };
 
-
+View.prototype.removeResourceFromList = function(idResInList)
+{
+	var li = document.getElementById(idResInList);
+	li.parentNode.removeChild(li);
+}
+View.prototype.removeEventFromList = function(idEvInList)
+{
+	var li = document.getElementById(idEvInList);
+	li.parentNode.removeChild(li);
+}
 
 
 

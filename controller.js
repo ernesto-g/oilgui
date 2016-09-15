@@ -56,6 +56,17 @@ var addEvent = function()
 	eventCounter++;
 };
 
+var deleteEventFromList = function(idEvInList)
+{
+	console.log("saco event:"+idEvInList);
+	view.removeEventFromList(idEvInList);
+};
+var deleteResourceFromList = function(idResInList)
+{
+	view.removeResourceFromList(idResInList);
+
+};
+
 var saveAll = function()
 {
 	var idRes=0;
