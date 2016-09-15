@@ -105,3 +105,12 @@ var saveAll = function()
 	}
 	console.log(tasks);
 };
+
+
+var generateOIL = function()
+{
+	saveAll();
+	
+	
+	
+};

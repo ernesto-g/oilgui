@@ -12,14 +12,15 @@ View.prototype.insertTaskInTable = function(idTask)
 	var row = table.insertRow(-1);
 
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<label>Nombre: </label><input type='text'></input>";
+	cell1.innerHTML = "<label>Nombre: </label><input id='task_name_"+idTask+"' type='text'></input>";
 	
 	var cell1 = row.insertCell(1);
-	cell1.innerHTML = "<div id='task_div_"+idTask+"' style=''></br><label>Prioridad: </label><input type='number'></input> "+
-	"</br><label>STACK: </label><input type='number'></input> "+
-	"</br><label>SCHEDULE: </label><select><option value=''>NON</option><option value=''>FULL</option></select> "+
-	"</br><label>ACTIVATION: </label><input type='number'></input> "+
-	"</br><label>AUTOSTART: </label><select><option value=''>TRUE</option><option value=''>FALSE</option></select> "+
+	cell1.innerHTML = "<div id='task_div_"+idTask+"' style=''>" +
+	"</br><label>Prioridad: </label><input id='task_pri_"+idTask+"' type='number'></input> "+
+	"</br><label>STACK: </label><input id='task_stack_"+idTask+"' type='number'></input> "+
+	"</br><label>SCHEDULE: </label><select id='task_sch_"+idTask+"'><option value='NON'>NON</option><option value='FULL'>FULL</option></select> "+
+	"</br><label>ACTIVATION: </label><input id='task_activ_"+idTask+"' type='number'></input> "+
+	"</br><label>AUTOSTART: </label><select id='task_autos_"+idTask+"' ><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
 	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");'>+</button> <ul id='res_list_task_"+idTask+"' ></ul>" +
 	"</br><label>EVENTS: </label><button onclick='addEventToTask("+idTask+");'>+</button> <ul id='event_list_task_"+idTask+"' ></ul>" +
 	"</div>";
@@ -143,8 +144,8 @@ View.prototype.addEvent = function(idTask,events)
 	var cmb = "<select>";
 	for(var i in events)
 	{
-		var r = events[i];
-		cmb+="<option value=''>"+r+"</option>";
+		var ev = events[i];
+		cmb+="<option value='"+ev.getId()+"'>"+ev.getName()+"</option>";
 	}
 	cmb+="</select><button onclick=\"deleteEventFromList('"+"item_ev_in_list_"+this.uniqueIdCounter+"');\">X</button>";
 	li.innerHTML = cmb;
@@ -158,7 +159,7 @@ View.prototype.addEvent = function(idTask,events)
 */
 View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagResEv)
 {
-	console.log("update de combos");
+	//console.log("update de combos");
 	var optionsStr="";
 	for(var i in resources)
 	{
@@ -183,10 +184,10 @@ View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagRe
 				try {
 					var combo = node.childNodes[0];
 					var selectedIdRes = combo.options[combo.selectedIndex].value;
-					console.log("idRes seleccionado:"+selectedIdRes);
+					//console.log("idRes seleccionado:"+selectedIdRes);
 					// creo nuevo combo
-					console.log("creo nuevo combo");
-					console.log(optionsStr);
+					//console.log("creo nuevo combo");
+					//console.log(optionsStr);
 					combo.innerHTML = optionsStr;
 					// selecciono el que estaba
 					for (var i = 0; i < combo.options.length; i++) {
@@ -214,14 +215,49 @@ View.prototype.removeEventFromList = function(idEvInList)
 }
 
 
-
+/**
+* Devuelve un objeto Task con los datos cargados en la grafica
+*/
 View.prototype.getTaskFromForm = function(idTask)
 {
 	var div = document.getElementById("task_div_"+idTask);
 	if(div!=null)
 	{
 		var task = new Task(idTask);
-		// leer datos del formulario para esta tarea y cargarlos en la tarea
+		task.name = document.getElementById("task_name_"+idTask).value;
+		task.priority = parseInt(document.getElementById("task_pri_"+idTask).value);
+		task.stack = parseInt(document.getElementById("task_stack_"+idTask).value);
+		task.schedule = document.getElementById("task_sch_"+idTask).value;
+		task.activation = parseInt(document.getElementById("task_activ_"+idTask).value);
+		task.autostart = document.getElementById("task_autos_"+idTask).value;
+		// resources list
+		var ul = document.getElementById("res_list_task_"+idTask);
+		if(ul!=null)
+		{
+			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
+			{
+				var node = ul.childNodes[index];
+				try {
+					var combo = node.childNodes[0];
+					var selectedIdRes = combo.options[combo.selectedIndex].value;
+					task.resources.push(parseInt(selectedIdRes));
+				}catch(err){}
+			}
+		}
+		// events list
+		var ul = document.getElementById("event_list_task_"+idTask);
+		if(ul!=null)
+		{
+			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
+			{
+				var node = ul.childNodes[index];
+				try {
+					var combo = node.childNodes[0];
+					var selectedIdEv = combo.options[combo.selectedIndex].value;
+					task.events.push(parseInt(selectedIdEv));
+				}catch(err){}
+			}		
+		}		
 		return task;
 	}
 	return null;
