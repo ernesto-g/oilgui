@@ -1,5 +1,6 @@
 <html>
 		<head>
+		<script src="./model.js" ></script>
 		<script src="./view.js" ></script>
 		<script src="./entities/Task.js" ></script>
 		<script src="./entities/Resource.js" ></script>
@@ -22,7 +23,7 @@
 		  <tr>
 			<td>STATUS</td>
 			<td>
-				<select>
+				<select id="os_status">
 				  <option value="STANDARD">STANDARD</option>
 				  <option value="-">-</option>
 				</select>
@@ -31,7 +32,7 @@
 		  <tr>
 			<td>STARTUPHOOK</td>
 			<td>
-				<select>
+				<select id="os_startuphook">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -40,7 +41,7 @@
 		  <tr>
 			<td>ERRORHOOK</td>
 			<td>
-				<select>
+				<select id="os_errorhook">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -49,7 +50,7 @@
 		  <tr>
 			<td>SHUTDOWNHOOK</td>
 			<td>
-				<select>
+				<select id="os_shutdownhook">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -58,7 +59,7 @@
 		  <tr>
 			<td>PRETASKHOOK</td>
 			<td>
-				<select>
+				<select id="os_pretaskhook">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -67,7 +68,7 @@
 		  <tr>
 			<td>POSTTASKHOOK</td>
 			<td>
-				<select>
+				<select id="os_posttaskhook">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -76,7 +77,7 @@
 		  <tr>
 			<td>USEGETSERVICEID</td>
 			<td>
-				<select>
+				<select id="os_servid">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -85,7 +86,7 @@
 		  <tr>
 			<td>USEPARAMETERACCESS</td>
 			<td>
-				<select>
+				<select id="os_paraccess">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>
@@ -94,7 +95,7 @@
 		  <tr>
 			<td>USERESSCHEDULER</td>
 			<td>
-				<select>
+				<select id="os_sch">
 				  <option value="STANDARD">TRUE</option>
 				  <option value="-">FALSE</option>
 				</select>

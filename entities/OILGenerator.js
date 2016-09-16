@@ -1,8 +1,6 @@
-function OILGenerator(tasks,resources,events)
+function OILGenerator(model)
 {
-	this.tasks= tasks;
-	this.resources = resources;
-	this.events = events;
+	this.model= model;
 };
 
 OILGenerator.prototype.generate = function()

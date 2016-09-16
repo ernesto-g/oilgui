@@ -285,4 +285,18 @@ View.prototype.getEventFromForm = function(idEvent)
 	}
 	return null;
 };
+View.prototype.getOsDataFromForm = function()
+{
+/*
+os_status
+os_startuphook
+os_errorhook
+os_shutdownhook
+os_pretaskhook
+os_posttaskhook
+os_servid
+os_paraccess
+os_sch
+*/
 
+};
