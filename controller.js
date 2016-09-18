@@ -100,14 +100,28 @@ var saveAll = function()
 			model.tasks[idTask] = task;		
 		}
 	}
+	
+	model.os = view.getOsDataFromForm();
 	console.log(model);
 };
 
+function downloadFile(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
 
 var generateOIL = function()
 {
 	saveAll();
 	var oilG = new OILGenerator(model);
-	oilG.generate();
-	
+	var text = oilG.generate();
+	downloadFile("os.oil",text);
 };

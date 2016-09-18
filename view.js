@@ -12,14 +12,14 @@ View.prototype.insertTaskInTable = function(idTask)
 	var row = table.insertRow(-1);
 
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<label>Nombre: </label><input id='task_name_"+idTask+"' type='text'></input>";
+	cell1.innerHTML = "<label>Nombre: </label><input id='task_name_"+idTask+"' type='text' value='New Task'></input>";
 	
 	var cell1 = row.insertCell(1);
 	cell1.innerHTML = "<div id='task_div_"+idTask+"' style=''>" +
-	"</br><label>Prioridad: </label><input id='task_pri_"+idTask+"' type='number'></input> "+
-	"</br><label>STACK: </label><input id='task_stack_"+idTask+"' type='number'></input> "+
+	"</br><label>Prioridad: </label><input id='task_pri_"+idTask+"' type='number' value='1'></input> "+
+	"</br><label>STACK: </label><input id='task_stack_"+idTask+"' type='number' value='512'></input> "+
 	"</br><label>SCHEDULE: </label><select id='task_sch_"+idTask+"'><option value='NON'>NON</option><option value='FULL'>FULL</option></select> "+
-	"</br><label>ACTIVATION: </label><input id='task_activ_"+idTask+"' type='number'></input> "+
+	"</br><label>ACTIVATION: </label><input id='task_activ_"+idTask+"' type='number' value='1'></input> "+
 	"</br><label>AUTOSTART: </label><select id='task_autos_"+idTask+"' ><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
 	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");'>+</button> <ul id='res_list_task_"+idTask+"' ></ul>" +
 	"</br><label>EVENTS: </label><button onclick='addEventToTask("+idTask+");'>+</button> <ul id='event_list_task_"+idTask+"' ></ul>" +
@@ -287,16 +287,16 @@ View.prototype.getEventFromForm = function(idEvent)
 };
 View.prototype.getOsDataFromForm = function()
 {
-/*
-os_status
-os_startuphook
-os_errorhook
-os_shutdownhook
-os_pretaskhook
-os_posttaskhook
-os_servid
-os_paraccess
-os_sch
-*/
+	var os = new Os();
+	os.osStatus = document.getElementById("os_status").value;
+	os.osStartupHook = document.getElementById("os_startuphook").value;
+	os.osErrorHook = document.getElementById("os_errorhook").value;
+	os.osShutDownHook = document.getElementById("os_shutdownhook").value;
+	os.osPreTaskHook = document.getElementById("os_pretaskhook").value;
+	os.osPostTaskHook = document.getElementById("os_posttaskhook").value;
+	os.osServId = document.getElementById("os_servid").value;
+	os.osParAccess = document.getElementById("os_paraccess").value;
+	os.osSch = document.getElementById("os_sch").value;
 
+	return os;
 };
