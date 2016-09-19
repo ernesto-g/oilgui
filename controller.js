@@ -1,6 +1,7 @@
 var taskCounter=0;
 var resourceCounter=0;
 var eventCounter=0;
+var counterCounter=0;
 
 
 var view = new View();
@@ -23,6 +24,11 @@ var deleteEvent = function(idEvent)
 {
 	view.removeEventFromTable(idEvent);
 	delete model.events[idEvent];
+};
+var deleteCounter = function(idCounter)
+{
+	view.removeCounterFromTable(idCounter);
+	delete model.counters[idCounter];
 };
 
 var addTask = function()
@@ -53,6 +59,13 @@ var addEvent = function()
 	view.insertEventInTable(eventCounter);
 	
 	eventCounter++;
+};
+
+var addCounter = function()
+{
+	view.insertCounterInTable(counterCounter);
+	
+	counterCounter++;
 };
 
 var deleteEventFromList = function(idEvInList)

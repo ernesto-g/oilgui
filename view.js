@@ -50,6 +50,26 @@ View.prototype.insertEventInTable = function(idEvent)
 	cell1.innerHTML = "<button onclick='deleteEvent("+idEvent+");'>X</button>";
 	return table.rows.length;	
 };
+View.prototype.insertCounterInTable = function(idCounter)
+{
+	var table = document.getElementById("tableCounters");
+	var row = table.insertRow(-1);
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = "<label>Nombre:</label><input id='counterName_"+idCounter+"' type='text' value='HardwareCounter"+idCounter+"'></input>";
+	
+	var cell1 = row.insertCell(1);
+	cell1.innerHTML = "<div id='counter_div_"+idCounter+"' style=''>"+
+	"</br><label>MAXALLOWEDVALUE:</label><input id='counter_max_val_"+idCounter+"' type='number' value='1000'></input>"+
+	"</br><label>MINCYCLE:</label><input id='counter_min_cyc_"+idCounter+"' type='number' value='1'></input>"+
+	"</br><label>TICKSPERBASE:</label><input id='counter_tick_"+idCounter+"' type='number' value='1'></input>"+
+	"</br><label>COUNTER:</label><input id='counter_counter_"+idCounter+"' type='text' value='HWCOUNTER"+idCounter+"'></input>"+
+	"</br><label>TYPE:</label><select id='counter_type_"+idCounter+"' ><option value='HARDWARE'>HARDWARE</option><option value='-'>-</option></select>"+
+	"</div>";
+	
+	var cell1 = row.insertCell(2);
+	cell1.innerHTML = "<button onclick='deleteCounter("+idCounter+");'>X</button>";
+	return table.rows.length;	
+};
 
 View.prototype.findTaskRowInTable = function(idTask)
 {
@@ -87,6 +107,18 @@ View.prototype.findEventRowInTable = function(idEvent)
 	}
 	return -1;
 }
+View.prototype.findCounterRowInTable = function(idCounter)
+{
+	var table = document.getElementById("tableCounters");
+	for (var i = 1, row; row = table.rows[i]; i++) {
+		var cell=row.cells[1];
+		if(cell.childNodes[0].id=="counter_div_"+idCounter)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
 
 View.prototype.removeTaskFromTable = function(idTask)
 {
@@ -104,6 +136,12 @@ View.prototype.removeEventFromTable = function(idEvent)
 {
 	var table = document.getElementById("tableEvents");
 	var row = this.findEventRowInTable(idEvent);
+	table.deleteRow(row);
+}
+View.prototype.removeCounterFromTable = function(idCounter)
+{
+	var table = document.getElementById("tableCounters");
+	var row = this.findCounterRowInTable(idCounter);
 	table.deleteRow(row);
 }
 
@@ -299,4 +337,48 @@ View.prototype.getOsDataFromForm = function()
 	os.osSch = document.getElementById("os_sch").value;
 
 	return os;
+};
+View.prototype.getCounterFromForm = function(idCounter)
+{
+	var div = document.getElementById("counter_div_"+idCounter);
+	if(div!=null)
+	{
+		var task = new Task(idTask);
+		task.name = document.getElementById("task_name_"+idTask).value;
+		task.priority = parseInt(document.getElementById("task_pri_"+idTask).value);
+		task.stack = parseInt(document.getElementById("task_stack_"+idTask).value);
+		task.schedule = document.getElementById("task_sch_"+idTask).value;
+		task.activation = parseInt(document.getElementById("task_activ_"+idTask).value);
+		task.autostart = document.getElementById("task_autos_"+idTask).value;
+		// resources list
+		var ul = document.getElementById("res_list_task_"+idTask);
+		if(ul!=null)
+		{
+			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
+			{
+				var node = ul.childNodes[index];
+				try {
+					var combo = node.childNodes[0];
+					var selectedIdRes = combo.options[combo.selectedIndex].value;
+					task.resources.push(parseInt(selectedIdRes));
+				}catch(err){}
+			}
+		}
+		// events list
+		var ul = document.getElementById("event_list_task_"+idTask);
+		if(ul!=null)
+		{
+			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
+			{
+				var node = ul.childNodes[index];
+				try {
+					var combo = node.childNodes[0];
+					var selectedIdEv = combo.options[combo.selectedIndex].value;
+					task.events.push(parseInt(selectedIdEv));
+				}catch(err){}
+			}		
+		}		
+		return task;
+	}
+	return null;
 };

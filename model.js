@@ -4,6 +4,7 @@ function Model()
 	this.resources = [];
 	this.events = [];
 	this.tasks = [];
+	this.counters = [];
 	this.os = null;
 };
 
