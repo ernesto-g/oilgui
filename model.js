@@ -6,6 +6,8 @@ function Model()
 	this.tasks = [];
 	this.counters = [];
 	this.os = null;
+	this.alarms = [];
+	
 };
 
 Model.prototype.toString = function()

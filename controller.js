@@ -2,7 +2,7 @@ var taskCounter=0;
 var resourceCounter=0;
 var eventCounter=0;
 var counterCounter=0;
-
+var alarmCounter=0;
 
 var view = new View();
 var model = new Model();
@@ -68,6 +68,28 @@ var addCounter = function()
 	counterCounter++;
 };
 
+var addAlarm = function()
+{
+	view.insertAlarmInTable(alarmCounter,model);
+	
+	alarmCounter++;
+};
+
+var updateCountersComboInAlarm = function(idAlarm)
+{
+	view.updateCountersComboInAlarm(idAlarm,model.counters);
+};
+var changeAlarmActionEvent = function(idAlarm)
+{
+	view.changeAlarmAction(idAlarm,model);
+}
+var updateAutostartInAlarm = function(idAlarm)
+{
+	view.updateAutostartInAlarm(idAlarm);
+};
+
+
+
 var deleteEventFromList = function(idEvInList)
 {
 	console.log("saco event:"+idEvInList);
@@ -78,6 +100,10 @@ var deleteResourceFromList = function(idResInList)
 	view.removeResourceFromList(idResInList);
 
 };
+
+
+
+
 
 var saveAll = function()
 {
@@ -115,6 +141,29 @@ var saveAll = function()
 	}
 	
 	model.os = view.getOsDataFromForm();
+
+	// Counters
+	var idCounter=0;
+	for(var idCounter=0; idCounter<counterCounter; idCounter++)
+	{
+		var counter = view.getCounterFromForm(idCounter);
+		if(counter!=null)
+		{
+			model.counters[idCounter] = counter;
+		}
+	}
+	
+	// Alarms
+	for(var idAlarm=0; idAlarm<alarmCounter; idAlarm++)
+	{
+		var a = view.getAlarmFromForm(idAlarm);
+		if(a!=null)
+		{
+			model.alarms[idAlarm] = a;
+		}
+	}
+		
+		
 	console.log(model);
 };
 

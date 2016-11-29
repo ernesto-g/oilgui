@@ -71,6 +71,90 @@ View.prototype.insertCounterInTable = function(idCounter)
 	return table.rows.length;	
 };
 
+View.prototype.insertAlarmInTable = function(idAlarm,model)
+{
+	var table = document.getElementById("tableAlarms");
+	var row = table.insertRow(-1);
+	var cell1 = row.insertCell(0);
+	cell1.innerHTML = "<label>Nombre:</label><input id='alarmName_"+idAlarm+"' type='text' value='Alarm"+idAlarm+"'></input>";
+	
+	var cell1 = row.insertCell(1);
+	cell1.innerHTML = "<div id='alarm_div_"+idAlarm+"' style=''>"+
+	"</br><label>COUNTER: </label><select id='alarm_counter_cmb_"+idAlarm+"' ></select> "+	
+	"</br><label>AUTOSTART: </label><select id='alarm_autos_"+idAlarm+"' onchange='updateAutostartInAlarm("+idAlarm+")'><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
+	"<div id='alarm_div_autostart_"+idAlarm+"'>" +
+		"</br><label>ALARMTIME:</label><input id='alarm_alarmtime_"+idAlarm+"' type='number' value='1'></input>"+
+		"</br><label>CYCLETIME:</label><input id='alarm_cycletime_"+idAlarm+"' type='number' value='1'></input>"+
+	"</div> "+
+	"</br><label>ACTION: </label><select id='alarm_action_cmb_"+idAlarm+"' onchange='changeAlarmActionEvent("+idAlarm+")' ><option value='ACTIVATETASK'>ACTIVATETASK</option><option value='SETEVENT'>SETEVENT</option><option value='ALARMCALLBACK'>ALARMCALLBACK</option></select> "+	
+		"<div id='alarm_div_action_"+idAlarm+"'>" +
+		"</div> "+
+	"</div>";
+	
+	this.updateCountersComboInAlarm(idAlarm,model.counters);
+	this.changeAlarmAction(idAlarm,model);
+	
+	var cell1 = row.insertCell(2);
+	cell1.innerHTML = "<button onclick='deleteAlarm("+idAlarm+");'>X</button>";
+	return table.rows.length;	
+};
+
+View.prototype.updateAutostartInAlarm = function(idAlarm)
+{
+	var e = document.getElementById("alarm_div_autostart_"+idAlarm);
+
+	var cmb = document.getElementById("alarm_autos_"+idAlarm);
+	console.log(cmb.value);
+	if(cmb.value=="TRUE")
+		e.style.display="block";
+	else
+		e.style.display="none";
+};
+View.prototype.updateCountersComboInAlarm = function(idAlarm,counters)
+{
+	var e = document.getElementById("alarm_counter_cmb_"+idAlarm);
+	var str = "";
+	for(var i in counters)
+	{
+		str+="<option value='"+counters[i].name+"'>"+counters[i].name+"</option>";
+	}
+	e.innerHTML = str;
+};
+View.prototype.changeAlarmAction = function(idAlarm,model)
+{
+	var action = document.getElementById("alarm_action_cmb_"+idAlarm).value;	
+	var e = document.getElementById("alarm_div_action_"+idAlarm);
+	
+	var str = "";
+	if(action=="ACTIVATETASK" || action=="SETEVENT")
+	{
+		str+="</br><label>TASK: </label><select id='alarm_task_"+idAlarm+"' >";
+		var tasks = model.tasks;
+		for(var i in tasks)
+		{
+			str+="<option value='"+tasks[i].name+"'>"+tasks[i].name+"</option>"
+		}
+		str+="</select>";
+	}
+	if(action=="SETEVENT")
+	{
+		str+="</br><label>EVENT: </label><select id='alarm_event_"+idAlarm+"' >";
+		var events = model.events;
+		for(var i in events)
+		{
+			str+="<option value='"+events[i].eventName+"'>"+events[i].eventName+"</option>"
+		}
+		str+="</select>";
+	}
+	if(action=="ALARMCALLBACK")
+	{
+		str+="</br><label>ALARMCALLBACKNAME: </label><input id='alarm_callback_"+idAlarm+"' type='text' value=''></input> "
+	}	
+	e.innerHTML = str;
+};
+
+
+
 View.prototype.findTaskRowInTable = function(idTask)
 {
 	var table = document.getElementById("tableTasks");
@@ -343,42 +427,48 @@ View.prototype.getCounterFromForm = function(idCounter)
 	var div = document.getElementById("counter_div_"+idCounter);
 	if(div!=null)
 	{
-		var task = new Task(idTask);
-		task.name = document.getElementById("task_name_"+idTask).value;
-		task.priority = parseInt(document.getElementById("task_pri_"+idTask).value);
-		task.stack = parseInt(document.getElementById("task_stack_"+idTask).value);
-		task.schedule = document.getElementById("task_sch_"+idTask).value;
-		task.activation = parseInt(document.getElementById("task_activ_"+idTask).value);
-		task.autostart = document.getElementById("task_autos_"+idTask).value;
-		// resources list
-		var ul = document.getElementById("res_list_task_"+idTask);
-		if(ul!=null)
-		{
-			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
-			{
-				var node = ul.childNodes[index];
-				try {
-					var combo = node.childNodes[0];
-					var selectedIdRes = combo.options[combo.selectedIndex].value;
-					task.resources.push(parseInt(selectedIdRes));
-				}catch(err){}
-			}
-		}
-		// events list
-		var ul = document.getElementById("event_list_task_"+idTask);
-		if(ul!=null)
-		{
-			for(var index in ul.childNodes) // itero combos de recursos de esta tarea
-			{
-				var node = ul.childNodes[index];
-				try {
-					var combo = node.childNodes[0];
-					var selectedIdEv = combo.options[combo.selectedIndex].value;
-					task.events.push(parseInt(selectedIdEv));
-				}catch(err){}
-			}		
-		}		
-		return task;
+		var c = new Counter(idCounter);
+		c.maxAllowValue = document.getElementById("counter_max_val_"+idCounter).value;
+		c.minCycle = document.getElementById("counter_min_cyc_"+idCounter).value;
+		c.tickPerBase = document.getElementById("counter_tick_"+idCounter).value;
+		c.name = document.getElementById("counterName_"+idCounter).value;
+		c.counter = document.getElementById("counter_counter_"+idCounter).value;
+		c.type = document.getElementById("counter_type_"+idCounter).value;
+		return c;
+	}
+	return null;
+};
+
+View.prototype.getAlarmFromForm = function(idAlarm)
+{
+	var div = document.getElementById("alarm_div_"+idAlarm);
+	if(div!=null)
+	{
+		var a = new Alarm(idAlarm);
+		a.name = document.getElementById("alarmName_"+idAlarm).value;
+		a.counter = document.getElementById("alarm_counter_cmb_"+idAlarm).value;
+		a.autostart = document.getElementById("alarm_autos_"+idAlarm).value;
+		a.action = document.getElementById("alarm_action_cmb_"+idAlarm).value;
+		
+		a.alarmtime = document.getElementById("alarm_alarmtime_"+idAlarm).value;
+		a.cycletime = document.getElementById("alarm_cycletime_"+idAlarm).value;
+
+		a.alarmcallback = null;
+		var aux = document.getElementById("alarm_callback_"+idAlarm)
+		if(aux!=null)
+				a.alarmcallback = aux.value;
+				
+		a.task = null;
+		var aux = document.getElementById("alarm_task_"+idAlarm)
+		if(aux!=null)
+			a.task = aux.value;
+			
+		a.event = null;
+		var aux = document.getElementById("alarm_event_"+idAlarm)
+		if(aux!=null)
+			a.event = aux.value;
+			
+		return a;
 	}
 	return null;
 };
