@@ -16,7 +16,7 @@
 		<script src="./entities/Event.js" ></script>
 		<script src="./entities/Os.js" ></script>		
 		<script src="./entities/OILGenerator.js" ></script>				
-		<script src="./controller.js" ></script>
+
 		
 	</head>
 
@@ -69,6 +69,10 @@
 		
 		<h2 class="bg-success">Propiedades del OS</h2>
 		<table class="table table-bordered table-hover table-condensed" >
+		<colgroup>
+			   <col span="1" style="width: 25%;">
+			   <col span="1" style="width: 75%;">
+		</colgroup>		
 		  <tr>
 			<th>Propiedad</th>
 			<th>Valor</th> 
@@ -158,7 +162,7 @@
 		
 		<h2 class="bg-success">Resources</h2>
 		<button onclick="addResource();" class="btn btn-primary" >Agregar Resource</button>
-		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<button onclick="saveAll();" class="btn btn-success btn-saveall" id="btnSaveRes">Guardar</button>
 		<table class="table table-bordered table-hover table-condensed" id="tableResources">
 		<colgroup>
 			   <col span="1" style="width: 99%;">
@@ -172,7 +176,7 @@
 
 		<h2 class="bg-success">Events</h2>
 		<button onclick="addEvent();" class="btn btn-primary">Agregar Event</button>
-		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<button onclick="saveAll();" class="btn btn-success btn-saveall" id="btnSaveEv">Guardar</button>
 		<table class="table table-bordered table-hover table-condensed" id="tableEvents">
 			<colgroup>
 				   <col span="1" style="width: 99%;">
@@ -186,7 +190,7 @@
 		
 		<h2 class="bg-success">Tareas</h2>
 		<button onclick="addTask();" class="btn btn-primary">Agregar Tarea</button>
-		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<button onclick="saveAll();" class="btn btn-success btn-saveall" id="btnSaveTask">Guardar</button>
 		<table class="table table-bordered table-hover table-condensed" id="tableTasks">
 			<colgroup>
 				   <col span="1" style="width: 19%;">
@@ -202,7 +206,7 @@
 		
 		<h2 class="bg-success">Counters</h2>
 		<button onclick="addCounter();" class="btn btn-primary">Agregar Counter</button>
-		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<button onclick="saveAll();" class="btn btn-success btn-saveall" id="btnSaveCount">Guardar</button>
 		<table class="table table-bordered table-hover table-condensed" id="tableCounters">
 			<colgroup>
 				   <col span="1" style="width: 19%;">
@@ -218,7 +222,7 @@
 
 		<h2 class="bg-success">Alarmas</h2>
 		<button onclick="addAlarm();" class="btn btn-primary">Agregar Alarma</button>
-		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<button onclick="saveAll();" class="btn btn-success btn-saveall" id="btnSaveAl">Guardar</button>
 		<table class="table table-bordered table-hover table-condensed" id="tableAlarms">
 			<colgroup>
 				   <col span="1" style="width: 19%;">
@@ -241,5 +245,6 @@
     <script src="js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
-	
+
+	<script src="./controller.js" ></script>	
 </html>

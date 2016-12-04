@@ -51,7 +51,6 @@ var addEventToTask = function(idTask)
 var addResource = function()
 {
 	view.insertResourceInTable(resourceCounter);
-	
 	resourceCounter++;
 };
 var addEvent = function()
@@ -109,6 +108,8 @@ var deleteAlarm = function(idAlarm)
 
 var saveAll = function()
 {
+	view.disableSaveButtons();
+	
 	var idRes=0;
 	for(var idRes=0; idRes<resourceCounter; idRes++)
 	{
@@ -193,3 +194,43 @@ var generateOIL = function()
 	var text = oilG.generate();
 	downloadFile("os.oil",text);
 };
+
+
+/**
+ Eventos de click sobre campos para habilitar boton de guardar
+ */
+$('#tableResources').on('click', function (event) {
+  if (event.target != this) {
+	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON")
+		view.enableButtonById("btnSaveRes");
+  } 
+});
+$('#tableEvents').on('click', function (event) {
+  if (event.target != this) {
+	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON")
+		view.enableButtonById("btnSaveEv");
+  } 
+});
+$('#tableTasks').on('click', function (event) {
+  if (event.target != this) {
+	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON" || event.target.tagName=="SELECT" || event.target.tagName=="SPAN")
+		view.enableButtonById("btnSaveTask");
+  } 
+});
+$('#tableCounters').on('click', function (event) {
+  if (event.target != this) {
+	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON" || event.target.tagName=="SELECT")
+		view.enableButtonById("btnSaveCount");
+  } 
+});
+$('#tableAlarms').on('click', function (event) {
+  if (event.target != this) {
+	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON" || event.target.tagName=="SELECT")
+		view.enableButtonById("btnSaveAl");
+  } 
+});
+//__________________________________________________________________
+
+
+
+view.disableSaveButtons();

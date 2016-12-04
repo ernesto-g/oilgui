@@ -605,3 +605,23 @@ View.prototype.getAlarmFromForm = function(idAlarm)
 	}
 	return null;
 };
+
+
+/**
+* Pone en disabled todos los botones de guardar
+*/
+View.prototype.disableSaveButtons = function()
+{
+	var btns = document.getElementsByClassName("btn-saveall");
+	for(var i in btns)
+	{
+		var btn = btns[i];
+		btn.disabled = true;
+	}
+};
+
+View.prototype.enableButtonById = function(id)
+{
+	var btn = document.getElementById(id);
+	btn.disabled = false;
+};
