@@ -1,5 +1,12 @@
 <html>
 		<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="css/navbar-fixed-top.css" rel="stylesheet">
+	
 		<script src="./model.js" ></script>
 		<script src="./view.js" ></script>
 		<script src="./entities/Task.js" ></script>
@@ -14,6 +21,46 @@
 	</head>
 
 	<body>
+	
+	
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+			<img alt="Brand" src="img/ciaa_logo.jpg" height="32">
+		  </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Archivo <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Nuevo</a></li>
+                <li><a href="#">Abrir proyecto</a></li>
+                <li><a href="#">Guardar proyecto</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">OIL</li>
+                <li><a href="#">Generar OIL</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a>Generar OIL <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	<h1>Generador OIL</h1>
+	
+	
+	
 		<button onclick="generateOIL();">Generar OIL</button>
 		
 		<h2>Propiedades del OS</h2>
@@ -154,4 +201,13 @@
 		</table>
 		
 	</body>
+	
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+	
 </html>
