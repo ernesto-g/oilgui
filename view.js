@@ -203,6 +203,18 @@ View.prototype.findCounterRowInTable = function(idCounter)
 	}
 	return -1;
 }
+View.prototype.findAlarmRowInTable = function(idAlarm)
+{
+	var table = document.getElementById("tableAlarms");
+	for (var i = 1, row; row = table.rows[i]; i++) {
+		var cell=row.cells[1];
+		if(cell.childNodes[0].id=="alarm_div_"+idAlarm)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
 
 View.prototype.removeTaskFromTable = function(idTask)
 {
@@ -228,6 +240,13 @@ View.prototype.removeCounterFromTable = function(idCounter)
 	var row = this.findCounterRowInTable(idCounter);
 	table.deleteRow(row);
 }
+View.prototype.removeAlarmFromTable = function(idAlarm)
+{
+	var table = document.getElementById("tableAlarms");
+	var row = this.findAlarmRowInTable(idAlarm);
+	table.deleteRow(row);
+}
+
 
 /*
 * agrega el combo de recursos para el form de la tarea
@@ -277,7 +296,7 @@ View.prototype.addEvent = function(idTask,events)
 };
 
 /*
-* hace un update en el combo de resources por si se agrego uno nuevo
+* hace un update en el combo de resources/events por si se agrego uno nuevo
 */
 View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagResEv)
 {
@@ -306,10 +325,7 @@ View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagRe
 				try {
 					var combo = node.childNodes[0];
 					var selectedIdRes = combo.options[combo.selectedIndex].value;
-					//console.log("idRes seleccionado:"+selectedIdRes);
 					// creo nuevo combo
-					//console.log("creo nuevo combo");
-					//console.log(optionsStr);
 					combo.innerHTML = optionsStr;
 					// selecciono el que estaba
 					for (var i = 0; i < combo.options.length; i++) {
@@ -325,11 +341,115 @@ View.prototype.updateResourcesEventsCombos = function(idTaskMax,resources,flagRe
 	}
 };
 
+/*
+* hace un update en los combos de contadores para cada alarma, por si se agrego o borro alguno
+*/
+View.prototype.updateCountersCombosInAlarm = function(idAlarmMax,counters)
+{
+	var optionsStr="";
+	for(var i in counters)
+	{
+		var c = counters[i];
+		optionsStr+="<option value='"+c.getName()+"'>"+c.getName()+"</option>";
+	}	
+	// itero alarmas
+	for(var idAlarm=0; idAlarm<idAlarmMax;idAlarm++)
+	{
+		try {
+			var combo = document.getElementById("alarm_counter_cmb_"+idAlarm);
+			if(combo.options.length>0)
+				var selectedIdAl = combo.options[combo.selectedIndex].value;
+			else
+				var selectedIdAl = null;
+			// creo nuevo combo
+			combo.innerHTML = optionsStr;
+			// selecciono el que estaba
+			for (var i = 0; i < combo.options.length; i++) {
+				if (combo.options[i].value== selectedIdAl) {
+					combo.options[i].selected = true;
+					break;
+				}
+			}
+		}catch(err){};		
+	}
+};
+
+/*
+* hace un update en los combos de tareas para cada alarma, por si se agrego o borro alguna
+*/
+View.prototype.updateTasksCombosInAlarm = function(idAlarmMax,tasks)
+{
+	var optionsStr="";
+	for(var i in tasks)
+	{
+		var t = tasks[i];
+		optionsStr+="<option value='"+t.getName()+"'>"+t.getName()+"</option>";
+	}	
+	// itero alarmas
+	for(var idAlarm=0; idAlarm<idAlarmMax;idAlarm++)
+	{
+		try{
+			var combo = document.getElementById("alarm_task_"+idAlarm);
+			if(combo.options.length>0)
+				var selectedIdTask = combo.options[combo.selectedIndex].value;
+			else
+				var selectedIdTask = null;
+			// creo nuevo combo
+			combo.innerHTML = optionsStr;
+			// selecciono el que estaba
+			for (var i = 0; i < combo.options.length; i++) {
+				if (combo.options[i].value== selectedIdTask) {
+					combo.options[i].selected = true;
+					break;
+				}
+			}	
+		}catch(err){};				
+	}
+};
+/*
+* hace un update en los combos de eventospara cada alarma, por si se agrego o borro alguna
+*/
+View.prototype.updateEventsCombosInAlarm = function(idAlarmMax,events)
+{
+	var optionsStr="";
+	for(var i in events)
+	{
+		var e = events[i];
+		optionsStr+="<option value='"+e.getName()+"'>"+e.getName()+"</option>";
+	}	
+	// itero alarmas
+	for(var idAlarm=0; idAlarm<idAlarmMax;idAlarm++)
+	{
+		try{
+			var combo = document.getElementById("alarm_event_"+idAlarm);
+			if(combo.options.length>0)
+				var selectedIdEv= combo.options[combo.selectedIndex].value;
+			else
+				var selectedIdEv = null;
+			// creo nuevo combo
+			combo.innerHTML = optionsStr;
+			// selecciono el que estaba
+			for (var i = 0; i < combo.options.length; i++) {
+				if (combo.options[i].value== selectedIdEv) {
+					combo.options[i].selected = true;
+					break;
+				}
+			}	
+		}catch(err){};				
+	}
+};
+
+/*
+* Borra un resource de la lista, en la tarea
+*/
 View.prototype.removeResourceFromList = function(idResInList)
 {
 	var li = document.getElementById(idResInList);
 	li.parentNode.removeChild(li);
 }
+/*
+* Borra un event de la lista, en la tarea
+*/
 View.prototype.removeEventFromList = function(idEvInList)
 {
 	var li = document.getElementById(idEvInList);
@@ -384,7 +504,9 @@ View.prototype.getTaskFromForm = function(idTask)
 	}
 	return null;
 };
-
+/**
+* Devuelve un objeto Resource con los datos cargados en la grafica
+*/
 View.prototype.getResourceFromForm = function(idRes)
 {
 	var div = document.getElementById("resource_div_"+idRes);
@@ -396,6 +518,9 @@ View.prototype.getResourceFromForm = function(idRes)
 	}
 	return null;
 };
+/**
+* Devuelve un objeto Event con los datos cargados en la grafica
+*/
 View.prototype.getEventFromForm = function(idEvent)
 {
 	var div = document.getElementById("event_div_"+idEvent);
@@ -407,6 +532,9 @@ View.prototype.getEventFromForm = function(idEvent)
 	}
 	return null;
 };
+/**
+* Devuelve un objeto Os con los datos cargados en la grafica
+*/
 View.prototype.getOsDataFromForm = function()
 {
 	var os = new Os();
@@ -422,6 +550,9 @@ View.prototype.getOsDataFromForm = function()
 
 	return os;
 };
+/**
+* Devuelve un objeto Counter con los datos cargados en la grafica
+*/
 View.prototype.getCounterFromForm = function(idCounter)
 {
 	var div = document.getElementById("counter_div_"+idCounter);
@@ -438,7 +569,9 @@ View.prototype.getCounterFromForm = function(idCounter)
 	}
 	return null;
 };
-
+/**
+* Devuelve un objeto Alarm con los datos cargados en la grafica
+*/
 View.prototype.getAlarmFromForm = function(idAlarm)
 {
 	var div = document.getElementById("alarm_div_"+idAlarm);

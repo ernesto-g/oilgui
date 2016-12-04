@@ -15,3 +15,7 @@ Task.prototype.getId = function()
 {
 	return this.id;
 }
+Task.prototype.getName = function()
+{
+	return this.name;
+}

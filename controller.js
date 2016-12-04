@@ -92,7 +92,6 @@ var updateAutostartInAlarm = function(idAlarm)
 
 var deleteEventFromList = function(idEvInList)
 {
-	console.log("saco event:"+idEvInList);
 	view.removeEventFromList(idEvInList);
 };
 var deleteResourceFromList = function(idResInList)
@@ -100,7 +99,10 @@ var deleteResourceFromList = function(idResInList)
 	view.removeResourceFromList(idResInList);
 
 };
-
+var deleteAlarm = function(idAlarm)
+{
+	view.removeAlarmFromTable(idAlarm);	
+};
 
 
 
@@ -152,6 +154,10 @@ var saveAll = function()
 			model.counters[idCounter] = counter;
 		}
 	}
+	
+	view.updateCountersCombosInAlarm(alarmCounter,model.counters);
+	view.updateTasksCombosInAlarm(alarmCounter,model.tasks);
+	view.updateEventsCombosInAlarm(alarmCounter,model.events);
 	
 	// Alarms
 	for(var idAlarm=0; idAlarm<alarmCounter; idAlarm++)

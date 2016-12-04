@@ -13,3 +13,7 @@ Counter.prototype.getId = function()
 {
 	return this.id;
 }
+Counter.prototype.getName = function()
+{
+	return this.name;
+}
