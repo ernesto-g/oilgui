@@ -1,4 +1,29 @@
 body {
   min-height: 2000px;
   padding-top: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
+table{
+	margin-top: 10px;
+}
+
+h2{
+	padding: 10px;
+}
+
+.myplus{
+	top: -1px;
+	color:#337ab7;
+}
+
+.form-control{
+	width: initial;
+	display: initial;
+}
+
+label{
+	margin-right: 10px;
+}
+

@@ -12,21 +12,21 @@ View.prototype.insertTaskInTable = function(idTask)
 	var row = table.insertRow(-1);
 
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<label>Nombre: </label><input id='task_name_"+idTask+"' type='text' value='New Task'></input>";
+	cell1.innerHTML = "<label>Nombre: </label><input class='form-control' id='task_name_"+idTask+"' type='text' value='New Task'></input>";
 	
 	var cell1 = row.insertCell(1);
 	cell1.innerHTML = "<div id='task_div_"+idTask+"' style=''>" +
-	"</br><label>Prioridad: </label><input id='task_pri_"+idTask+"' type='number' value='1'></input> "+
-	"</br><label>STACK: </label><input id='task_stack_"+idTask+"' type='number' value='512'></input> "+
-	"</br><label>SCHEDULE: </label><select id='task_sch_"+idTask+"'><option value='NON'>NON</option><option value='FULL'>FULL</option></select> "+
-	"</br><label>ACTIVATION: </label><input id='task_activ_"+idTask+"' type='number' value='1'></input> "+
-	"</br><label>AUTOSTART: </label><select id='task_autos_"+idTask+"' ><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
-	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");'>+</button> <ul id='res_list_task_"+idTask+"' ></ul>" +
-	"</br><label>EVENTS: </label><button onclick='addEventToTask("+idTask+");'>+</button> <ul id='event_list_task_"+idTask+"' ></ul>" +
+	"</br><label>Prioridad: </label><input class='form-control'  id='task_pri_"+idTask+"' type='number' value='1'></input> "+
+	"</br><label>STACK: </label><input class='form-control' id='task_stack_"+idTask+"' type='number' value='512'></input> "+
+	"</br><label>SCHEDULE: </label><select class='form-control' id='task_sch_"+idTask+"'><option value='NON'>NON</option><option value='FULL'>FULL</option></select> "+
+	"</br><label>ACTIVATION: </label><input class='form-control' id='task_activ_"+idTask+"' type='number' value='1'></input> "+
+	"</br><label>AUTOSTART: </label><select class='form-control' id='task_autos_"+idTask+"' ><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
+	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");' class='btn' ><span  class='glyphicon glyphicon-plus myplus' aria-hidden='true'></span></button> <ul id='res_list_task_"+idTask+"' ></ul>" +
+	"</br><label>EVENTS: </label><button onclick='addEventToTask("+idTask+");' class='btn' ><span class='glyphicon glyphicon-plus myplus' aria-hidden='true'></span></button> <ul id='event_list_task_"+idTask+"' ></ul>" +
 	"</div>";
 	
 	var cell1 = row.insertCell(2);
-	cell1.innerHTML = "<button onclick='deleteTask("+idTask+");'>X</button>";
+	cell1.innerHTML = "<button onclick='deleteTask("+idTask+");' class='close'>&times;</button>";
 	return table.rows.length;
 };
 
@@ -35,9 +35,9 @@ View.prototype.insertResourceInTable = function(idResource)
 	var table = document.getElementById("tableResources");
 	var row = table.insertRow(-1);
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<div id='resource_div_"+idResource+"' style=''><input id='resName_"+idResource+"' type='text'></input></div>";
+	cell1.innerHTML = "<div id='resource_div_"+idResource+"' style=''><input class='form-control'  id='resName_"+idResource+"' type='text'></input></div>";
 	var cell1 = row.insertCell(1);
-	cell1.innerHTML = "<button onclick='deleteResource("+idResource+");'>X</button>";
+	cell1.innerHTML = "<button onclick='deleteResource("+idResource+");' class='close'>&times;</button>";
 	return table.rows.length;	
 };
 View.prototype.insertEventInTable = function(idEvent)
@@ -45,9 +45,9 @@ View.prototype.insertEventInTable = function(idEvent)
 	var table = document.getElementById("tableEvents");
 	var row = table.insertRow(-1);
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<div id='event_div_"+idEvent+"' style=''><input id='eventName_"+idEvent+"' type='text'></input></div>";
+	cell1.innerHTML = "<div id='event_div_"+idEvent+"' style=''><input class='form-control'  id='eventName_"+idEvent+"' type='text'></input></div>";
 	var cell1 = row.insertCell(1);
-	cell1.innerHTML = "<button onclick='deleteEvent("+idEvent+");'>X</button>";
+	cell1.innerHTML = "<button onclick='deleteEvent("+idEvent+");' class='close'>&times;</button>";
 	return table.rows.length;	
 };
 View.prototype.insertCounterInTable = function(idCounter)
@@ -55,19 +55,19 @@ View.prototype.insertCounterInTable = function(idCounter)
 	var table = document.getElementById("tableCounters");
 	var row = table.insertRow(-1);
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<label>Nombre:</label><input id='counterName_"+idCounter+"' type='text' value='HardwareCounter"+idCounter+"'></input>";
+	cell1.innerHTML = "<label>Nombre:</label><input class='form-control'  id='counterName_"+idCounter+"' type='text' value='HardwareCounter"+idCounter+"'></input>";
 	
 	var cell1 = row.insertCell(1);
 	cell1.innerHTML = "<div id='counter_div_"+idCounter+"' style=''>"+
-	"</br><label>MAXALLOWEDVALUE:</label><input id='counter_max_val_"+idCounter+"' type='number' value='1000'></input>"+
-	"</br><label>MINCYCLE:</label><input id='counter_min_cyc_"+idCounter+"' type='number' value='1'></input>"+
-	"</br><label>TICKSPERBASE:</label><input id='counter_tick_"+idCounter+"' type='number' value='1'></input>"+
-	"</br><label>COUNTER:</label><input id='counter_counter_"+idCounter+"' type='text' value='HWCOUNTER"+idCounter+"'></input>"+
-	"</br><label>TYPE:</label><select id='counter_type_"+idCounter+"' ><option value='HARDWARE'>HARDWARE</option><option value='-'>-</option></select>"+
+	"</br><label>MAXALLOWEDVALUE:</label><input class='form-control'  id='counter_max_val_"+idCounter+"' type='number' value='1000'></input>"+
+	"</br><label>MINCYCLE:</label><input class='form-control'  id='counter_min_cyc_"+idCounter+"' type='number' value='1'></input>"+
+	"</br><label>TICKSPERBASE:</label><input class='form-control'  id='counter_tick_"+idCounter+"' type='number' value='1'></input>"+
+	"</br><label>COUNTER:</label><input class='form-control'  id='counter_counter_"+idCounter+"' type='text' value='HWCOUNTER"+idCounter+"'></input>"+
+	"</br><label>TYPE:</label><select class='form-control' id='counter_type_"+idCounter+"' ><option value='HARDWARE'>HARDWARE</option><option value='-'>-</option></select>"+
 	"</div>";
 	
 	var cell1 = row.insertCell(2);
-	cell1.innerHTML = "<button onclick='deleteCounter("+idCounter+");'>X</button>";
+	cell1.innerHTML = "<button onclick='deleteCounter("+idCounter+");' class='close'>&times;</button>";
 	return table.rows.length;	
 };
 
@@ -76,17 +76,17 @@ View.prototype.insertAlarmInTable = function(idAlarm,model)
 	var table = document.getElementById("tableAlarms");
 	var row = table.insertRow(-1);
 	var cell1 = row.insertCell(0);
-	cell1.innerHTML = "<label>Nombre:</label><input id='alarmName_"+idAlarm+"' type='text' value='Alarm"+idAlarm+"'></input>";
+	cell1.innerHTML = "<label>Nombre:</label><input class='form-control' id='alarmName_"+idAlarm+"' type='text' value='Alarm"+idAlarm+"'></input>";
 	
 	var cell1 = row.insertCell(1);
 	cell1.innerHTML = "<div id='alarm_div_"+idAlarm+"' style=''>"+
-	"</br><label>COUNTER: </label><select id='alarm_counter_cmb_"+idAlarm+"' ></select> "+	
-	"</br><label>AUTOSTART: </label><select id='alarm_autos_"+idAlarm+"' onchange='updateAutostartInAlarm("+idAlarm+")'><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
+	"</br><label>COUNTER: </label><select class='form-control' id='alarm_counter_cmb_"+idAlarm+"' ></select> "+	
+	"</br><label>AUTOSTART: </label><select class='form-control' id='alarm_autos_"+idAlarm+"' onchange='updateAutostartInAlarm("+idAlarm+")'><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
 	"<div id='alarm_div_autostart_"+idAlarm+"'>" +
-		"</br><label>ALARMTIME:</label><input id='alarm_alarmtime_"+idAlarm+"' type='number' value='1'></input>"+
-		"</br><label>CYCLETIME:</label><input id='alarm_cycletime_"+idAlarm+"' type='number' value='1'></input>"+
+		"</br><label>ALARMTIME:</label><input class='form-control' id='alarm_alarmtime_"+idAlarm+"' type='number' value='1'></input>"+
+		"</br><label>CYCLETIME:</label><input class='form-control' id='alarm_cycletime_"+idAlarm+"' type='number' value='1'></input>"+
 	"</div> "+
-	"</br><label>ACTION: </label><select id='alarm_action_cmb_"+idAlarm+"' onchange='changeAlarmActionEvent("+idAlarm+")' ><option value='ACTIVATETASK'>ACTIVATETASK</option><option value='SETEVENT'>SETEVENT</option><option value='ALARMCALLBACK'>ALARMCALLBACK</option></select> "+	
+	"</br><label>ACTION: </label><select class='form-control' id='alarm_action_cmb_"+idAlarm+"' onchange='changeAlarmActionEvent("+idAlarm+")' ><option value='ACTIVATETASK'>ACTIVATETASK</option><option value='SETEVENT'>SETEVENT</option><option value='ALARMCALLBACK'>ALARMCALLBACK</option></select> "+	
 		"<div id='alarm_div_action_"+idAlarm+"'>" +
 		"</div> "+
 	"</div>";
@@ -95,7 +95,7 @@ View.prototype.insertAlarmInTable = function(idAlarm,model)
 	this.changeAlarmAction(idAlarm,model);
 	
 	var cell1 = row.insertCell(2);
-	cell1.innerHTML = "<button onclick='deleteAlarm("+idAlarm+");'>X</button>";
+	cell1.innerHTML = "<button onclick='deleteAlarm("+idAlarm+");' class='close'>&times;</button>";
 	return table.rows.length;	
 };
 
@@ -128,7 +128,7 @@ View.prototype.changeAlarmAction = function(idAlarm,model)
 	var str = "";
 	if(action=="ACTIVATETASK" || action=="SETEVENT")
 	{
-		str+="</br><label>TASK: </label><select id='alarm_task_"+idAlarm+"' >";
+		str+="</br><label>TASK: </label><select class='form-control' id='alarm_task_"+idAlarm+"' >";
 		var tasks = model.tasks;
 		for(var i in tasks)
 		{
@@ -138,7 +138,7 @@ View.prototype.changeAlarmAction = function(idAlarm,model)
 	}
 	if(action=="SETEVENT")
 	{
-		str+="</br><label>EVENT: </label><select id='alarm_event_"+idAlarm+"' >";
+		str+="</br><label>EVENT: </label><select class='form-control' id='alarm_event_"+idAlarm+"' >";
 		var events = model.events;
 		for(var i in events)
 		{
@@ -148,7 +148,7 @@ View.prototype.changeAlarmAction = function(idAlarm,model)
 	}
 	if(action=="ALARMCALLBACK")
 	{
-		str+="</br><label>ALARMCALLBACKNAME: </label><input id='alarm_callback_"+idAlarm+"' type='text' value=''></input> "
+		str+="</br><label>ALARMCALLBACKNAME: </label><input class='form-control'  id='alarm_callback_"+idAlarm+"' type='text' value=''></input> "
 	}	
 	e.innerHTML = str;
 };
@@ -258,13 +258,13 @@ View.prototype.addResource = function(idTask,resources)
 	var list = document.getElementById("res_list_task_"+idTask);
 	var li = document.createElement("li");
 	li.id = "item_res_in_list_"+this.uniqueIdCounter;
-	var cmb = "<select>";
+	var cmb = "<select class='form-control'>";
 	for(var i in resources)
 	{
 		var res = resources[i];
 		cmb+="<option value='"+res.getId()+"'>"+res.getName()+"</option>";
 	}
-	cmb+="</select><button onclick=\"deleteResourceFromList('"+"item_res_in_list_"+this.uniqueIdCounter+"');\">X</button>";
+	cmb+="</select><button onclick=\"deleteResourceFromList('"+"item_res_in_list_"+this.uniqueIdCounter+"');\" class='close'>&times;</button>";
 	li.innerHTML = cmb;
 	list.appendChild(li);
 
@@ -282,13 +282,13 @@ View.prototype.addEvent = function(idTask,events)
 	var li = document.createElement("li");
 	li.id = "item_ev_in_list_"+this.uniqueIdCounter;
 
-	var cmb = "<select>";
+	var cmb = "<select class='form-control'>";
 	for(var i in events)
 	{
 		var ev = events[i];
 		cmb+="<option value='"+ev.getId()+"'>"+ev.getName()+"</option>";
 	}
-	cmb+="</select><button onclick=\"deleteEventFromList('"+"item_ev_in_list_"+this.uniqueIdCounter+"');\">X</button>";
+	cmb+="</select><button onclick=\"deleteEventFromList('"+"item_ev_in_list_"+this.uniqueIdCounter+"');\" class='close'>&times;</button>";
 	li.innerHTML = cmb;
 	list.appendChild(li);
 

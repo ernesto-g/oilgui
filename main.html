@@ -21,50 +21,54 @@
 	</head>
 
 	<body>
-	
-	
-<!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">
-			<img alt="Brand" src="img/ciaa_logo.jpg" height="32">
-		  </a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Archivo <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Nuevo</a></li>
-                <li><a href="#">Abrir proyecto</a></li>
-                <li><a href="#">Guardar proyecto</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">OIL</li>
-                <li><a href="#">Generar OIL</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a>Generar OIL <span class="sr-only">(current)</span></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-	<h1>Generador OIL</h1>
-	
-	
-	
-		<button onclick="generateOIL();">Generar OIL</button>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">
+				<img alt="Brand" src="img/ciaa_logo.jpg" height="32">
+			  </a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+			  <ul class="nav navbar-nav">
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Archivo <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">Nuevo</a></li>
+					<li><a href="#">Abrir proyecto</a></li>
+					<li><a href="#">Guardar proyecto</a></li>
+					<li role="separator" class="divider"></li>
+					<li class="dropdown-header">OIL</li>
+					<li><a onclick="generateOIL();" >Generar OIL</a></li>
+				  </ul>
+				</li>
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ayuda <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">Ayuda online</a></li>
+					<li><a href="#">Acerca de</a></li>
+				  </ul>
+				</li>			
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li class="active"><a onclick="generateOIL();" >Generar OIL <span class="sr-only">(current)</span></a></li>
+			  </ul>
+			</div><!--/.nav-collapse -->
+		  </div>
+		</nav>
 		
-		<h2>Propiedades del OS</h2>
-		<table style="">
+		
+		<h1 >Generador OIL</h1>
+	
+		
+		<h2 class="bg-success">Propiedades del OS</h2>
+		<table class="table table-bordered table-hover table-condensed" >
 		  <tr>
 			<th>Propiedad</th>
 			<th>Valor</th> 
@@ -72,7 +76,7 @@
 		  <tr>
 			<td>STATUS</td>
 			<td>
-				<select id="os_status">
+				<select class='form-control' id="os_status">
 				  <option value="STANDARD">STANDARD</option>
 				  <option value="-">-</option>
 				</select>
@@ -81,7 +85,7 @@
 		  <tr>
 			<td>STARTUPHOOK</td>
 			<td>
-				<select id="os_startuphook">
+				<select  class='form-control'id="os_startuphook">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -90,7 +94,7 @@
 		  <tr>
 			<td>ERRORHOOK</td>
 			<td>
-				<select id="os_errorhook">
+				<select  class='form-control'id="os_errorhook">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -99,7 +103,7 @@
 		  <tr>
 			<td>SHUTDOWNHOOK</td>
 			<td>
-				<select id="os_shutdownhook">
+				<select  class='form-control' id="os_shutdownhook">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -108,7 +112,7 @@
 		  <tr>
 			<td>PRETASKHOOK</td>
 			<td>
-				<select id="os_pretaskhook">
+				<select class='form-control' id="os_pretaskhook">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -117,7 +121,7 @@
 		  <tr>
 			<td>POSTTASKHOOK</td>
 			<td>
-				<select id="os_posttaskhook">
+				<select class='form-control' id="os_posttaskhook">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -126,7 +130,7 @@
 		  <tr>
 			<td>USEGETSERVICEID</td>
 			<td>
-				<select id="os_servid">
+				<select class='form-control' id="os_servid">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -135,7 +139,7 @@
 		  <tr>
 			<td>USEPARAMETERACCESS</td>
 			<td>
-				<select id="os_paraccess">
+				<select class='form-control' id="os_paraccess">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -144,7 +148,7 @@
 		  <tr>
 			<td>USERESSCHEDULER</td>
 			<td>
-				<select id="os_sch">
+				<select class='form-control' id="os_sch">
 				  <option value="TRUE">TRUE</option>
 				  <option value="FALSE">FALSE</option>
 				</select>
@@ -152,51 +156,79 @@
 		  </tr>		  
 		</table>
 		
-		<h2>Resources</h2>
-		<button onclick="addResource();">Agregar Resource</button>
-		<button onclick="saveAll();">Guardar</button>
-		<table style="border: 1px solid red;" id="tableResources">
-		  <tr>
-			<th>Resource</th>
-		  </tr>
+		<h2 class="bg-success">Resources</h2>
+		<button onclick="addResource();" class="btn btn-primary" >Agregar Resource</button>
+		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<table class="table table-bordered table-hover table-condensed" id="tableResources">
+		<colgroup>
+			   <col span="1" style="width: 99%;">
+			   <col span="1" style="width: 1%;">
+		</colgroup>
+			<tr>
+				<th>Resource</th>
+				<th></th>
+			</tr>
 		</table>
 
-		<h2>Events</h2>
-		<button onclick="addEvent();">Agregar Event</button>
-		<button onclick="saveAll();">Guardar</button>
-		<table style="border: 1px solid red;" id="tableEvents">
+		<h2 class="bg-success">Events</h2>
+		<button onclick="addEvent();" class="btn btn-primary">Agregar Event</button>
+		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<table class="table table-bordered table-hover table-condensed" id="tableEvents">
+			<colgroup>
+				   <col span="1" style="width: 99%;">
+				   <col span="1" style="width: 1%;">
+			</colgroup>
 		  <tr>
 			<th>Event</th>
+			<th></th>
 		  </tr>
 		</table>
 		
-		<h2>Tareas</h2>
-		<button onclick="addTask();">Agregar Tarea</button>
-		<button onclick="saveAll();">Guardar</button>
-		<table style="border: 1px solid red;" id="tableTasks">
-		  <tr>
-			<th>Tarea</th>
-			<th>Propiedades</th> 
-		  </tr>
+		<h2 class="bg-success">Tareas</h2>
+		<button onclick="addTask();" class="btn btn-primary">Agregar Tarea</button>
+		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<table class="table table-bordered table-hover table-condensed" id="tableTasks">
+			<colgroup>
+				   <col span="1" style="width: 19%;">
+				   <col span="1" style="width: 80%;">
+				   <col span="1" style="width: 1%;">				   
+			</colgroup>
+			<tr>
+				<th>Tarea</th>
+				<th>Propiedades</th>
+				<th></th>
+			</tr>
 		</table>
 		
-		<h2>Counters</h2>
-		<button onclick="addCounter();">Agregar Counter</button>
-		<button onclick="saveAll();">Guardar</button>
-		<table style="border: 1px solid red;" id="tableCounters">
+		<h2 class="bg-success">Counters</h2>
+		<button onclick="addCounter();" class="btn btn-primary">Agregar Counter</button>
+		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<table class="table table-bordered table-hover table-condensed" id="tableCounters">
+			<colgroup>
+				   <col span="1" style="width: 19%;">
+				   <col span="1" style="width: 80%;">
+				   <col span="1" style="width: 1%;">				   
+			</colgroup>		
 		  <tr>
 			<th>Counter</th>
 			<th>Propiedades</th>
+			<th></th>
 		  </tr>
 		</table>
 
-		<h2>Alarmas</h2>
-		<button onclick="addAlarm();">Agregar Alarma</button>
-		<button onclick="saveAll();">Guardar</button>
-		<table style="border: 1px solid red;" id="tableAlarms">
+		<h2 class="bg-success">Alarmas</h2>
+		<button onclick="addAlarm();" class="btn btn-primary">Agregar Alarma</button>
+		<button onclick="saveAll();" class="btn btn-success">Guardar</button>
+		<table class="table table-bordered table-hover table-condensed" id="tableAlarms">
+			<colgroup>
+				   <col span="1" style="width: 19%;">
+				   <col span="1" style="width: 80%;">
+				   <col span="1" style="width: 1%;">				   
+			</colgroup>		
 		  <tr>
 			<th>Alarma</th>
 			<th>Propiedades</th>
+			<th></th>
 		  </tr>
 		</table>
 		
@@ -206,7 +238,7 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
 	
