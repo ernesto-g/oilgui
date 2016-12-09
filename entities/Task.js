@@ -9,6 +9,7 @@ function Task(idTask)
 	this.autostart = null;
 	this.resources = [];
 	this.events = [];
+	this.type = null;
 }
 
 Task.prototype.getId = function()

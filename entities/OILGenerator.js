@@ -6,7 +6,7 @@ function OILGenerator(model)
 OILGenerator.prototype.generate = function()
 {
 	console.log("Genero OIL file");
-	console.log(model);
+	console.log(this.model);
 	var str = "\nOSEK OSEK {\
 \n	OS GeneratedOilOS {	\n\
 		STATUS = "+this.model.os.osStatus+";	\n\
@@ -18,8 +18,11 @@ OILGenerator.prototype.generate = function()
 		USEGETSERVICEID = "+this.model.os.osServId+";	\n\
 		USEPARAMETERACCESS = "+this.model.os.osParAccess+";	\n\
 		USERESSCHEDULER = "+this.model.os.osSch+";	\n\
+		MEMMAP = FALSE;	\n\
 	};	\n\
 ";
+
+	str+="\n\tAPPMODE = AppMode1;\n";
 
 	for(var index in this.model.resources)
 	{
@@ -39,8 +42,14 @@ OILGenerator.prototype.generate = function()
 		PRIORITY = "+this.model.tasks[index].priority+";	\n\
 		SCHEDULE = "+this.model.tasks[index].schedule+"; \n\
 		ACTIVATION = "+this.model.tasks[index].activation+";	\n\
-		AUTOSTART = "+this.model.tasks[index].autostart+";	\n\
+		TYPE = "+this.model.tasks[index].type+";	\n\
 		STACK = "+this.model.tasks[index].stack+";	\n";
+
+		if(this.model.tasks[index].autostart=="TRUE")
+			str+="\t\tAUTOSTART = TRUE {\n\t\t\tAPPMODE = AppMode1;\n\t\t};";
+		else
+			str+="\t\tAUTOSTART = FALSE;";
+
 		for(var index2 in this.model.tasks[index].resources)
 		{
 			str+= "\n    	RESOURCE = "+this.model.resources[this.model.tasks[index].resources[index2]]+";";
@@ -75,6 +84,7 @@ OILGenerator.prototype.generate = function()
 		if(this.model.alarms[index].autostart)
 		{
 			str+= "\t\tAUTOSTART = TRUE { \n";
+			str+= "\t\t\tAPPMODE = AppMode1; \n";
 			str+= "\t\t\tALARMTIME = "+this.model.alarms[index].alarmtime+"; \n";
 			str+= "\t\t\tCYCLETIME = "+this.model.alarms[index].cycletime+"; \n";
 			str+= "\t\t}";		
@@ -106,6 +116,9 @@ OILGenerator.prototype.generate = function()
 		str+= "\n\t}";		
 	
 	}
+
+	// extra text
+	str+= "\n"+this.model.extraText;
 	
 	// end osek
 	str+= "\n};";

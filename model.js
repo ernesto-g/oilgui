@@ -7,6 +7,7 @@ function Model()
 	this.counters = [];
 	this.os = null;
 	this.alarms = [];
+	this.extraText=null;
 	
 };
 

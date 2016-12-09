@@ -19,6 +19,7 @@ View.prototype.insertTaskInTable = function(idTask)
 	"</br><label>Prioridad: </label><input class='form-control'  id='task_pri_"+idTask+"' type='number' value='1'></input> "+
 	"</br><label>STACK: </label><input class='form-control' id='task_stack_"+idTask+"' type='number' value='512'></input> "+
 	"</br><label>SCHEDULE: </label><select class='form-control' id='task_sch_"+idTask+"'><option value='NON'>NON</option><option value='FULL'>FULL</option></select> "+
+	"</br><label>TYPE: </label><select class='form-control' id='task_type_"+idTask+"'><option value='EXTENDED'>EXTENDED</option><option value='STANDARD'>STANDARD</option></select> "+
 	"</br><label>ACTIVATION: </label><input class='form-control' id='task_activ_"+idTask+"' type='number' value='1'></input> "+
 	"</br><label>AUTOSTART: </label><select class='form-control' id='task_autos_"+idTask+"' ><option value='TRUE'>TRUE</option><option value='FALSE'>FALSE</option></select> "+
 	"</br><label>RESOURCES: </label><button onclick='addResourceToTask("+idTask+");' class='btn' ><span  class='glyphicon glyphicon-plus myplus' aria-hidden='true'></span></button> <ul id='res_list_task_"+idTask+"' ></ul>" +
@@ -470,6 +471,7 @@ View.prototype.getTaskFromForm = function(idTask)
 		task.priority = parseInt(document.getElementById("task_pri_"+idTask).value);
 		task.stack = parseInt(document.getElementById("task_stack_"+idTask).value);
 		task.schedule = document.getElementById("task_sch_"+idTask).value;
+		task.type = document.getElementById("task_type_"+idTask).value;
 		task.activation = parseInt(document.getElementById("task_activ_"+idTask).value);
 		task.autostart = document.getElementById("task_autos_"+idTask).value;
 		// resources list
@@ -606,6 +608,13 @@ View.prototype.getAlarmFromForm = function(idAlarm)
 	return null;
 };
 
+/**
+* Devuelve el texto extra escrito en el formulario
+*/
+View.prototype.getExtraTextFromForm = function()
+{
+	return document.getElementById("text_extra").value;
+}
 
 /**
 * Pone en disabled todos los botones de guardar

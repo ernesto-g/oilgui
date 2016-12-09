@@ -170,6 +170,8 @@ var saveAll = function()
 		}
 	}
 		
+	// extra text
+	model.extraText = view.getExtraTextFromForm();
 		
 	console.log(model);
 };
