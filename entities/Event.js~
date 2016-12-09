@@ -1,20 +1,20 @@
-function Resource(idRes,name)
+function Event(idRes,name)
 {
 	this.id = idRes;
-	this.resName = name;
+	this.eventName = name;
 }
-Resource.prototype.getId = function()
+Event.prototype.getId = function()
 {
 	return this.id;
 }
-Resource.prototype.getName = function()
+Event.prototype.getName = function()
 {
-	return this.resName;
+	return this.eventName;
 }
 
-Resource.prototype.toString = function()
+Event.prototype.toString = function()
 {
-	return this.resName;
+	return this.eventName;
 }
 
 
