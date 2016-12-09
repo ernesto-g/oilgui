@@ -216,9 +216,93 @@ var generateOIL = function()
 };
 
 
+// Eventos del menu "Ayuda"
+var about = function()
+{
+	console.log("muestro abaout");
+	$('#aboutModal').modal('show');
+};
+
+// Eventos del menu "Archivo"
+
+var newProject = function()
+{
+	location.reload();
+};
+
+var saveProject = function()
+{
+	saveAll();
+	// paso values de los inputs al DOM
+	$('input').each(function(index, input){input.setAttribute('value', input.value)});
+	//paso values de los combos al DOM
+	var allSelects = $("select");
+	for(var i in allSelects)
+	{
+		var sel = allSelects[i];
+		var val = sel.value;
+		if(sel.options!=null)
+		{
+			for(var j=0;  j<sel.options.length; j++)
+			{
+				var op = sel.options[j];
+				if(op.value==val)
+					sel.options[j].setAttribute("selected", "true");			
+				else
+					sel.options[j].removeAttribute("selected");			
+			}
+		}		
+	}
+	//__________________________________
+
+	var el = document.getElementById('body');
+	var out = {"taskCounter":taskCounter,"resourceCounter":resourceCounter,"eventCounter":eventCounter,"counterCounter":counterCounter,"alarmCounter":alarmCounter,"model":model,"html":el.outerHTML};	
+	var text = JSON.stringify(out);
+	downloadFile("os.joil",text);
+};
+
+var openProject = function()
+{
+	$('#input_file_prj').focus().trigger('click');	
+};
+var openProjectFileEvent = function(event)
+{
+    var input = event.target;
+	console.log(input);
+    var reader = new FileReader();
+
+    reader.onload = function(){
+      	var text = reader.result;
+	  	var obj = JSON.parse(text);
+
+	  	// cargo los valores del archivo en la pagina	
+	  	var el = document.getElementById('body');	
+	  	el.outerHTML = obj.html;
+		taskCounter=obj.taskCounter;
+		resourceCounter=obj.resourceCounter;
+		eventCounter=obj.eventCounter;
+		counterCounter=obj.counterCounter;
+		alarmCounter=obj.alarmCounter;
+		model = obj.model;
+		document.getElementById('text_extra').innerHTML = model.extraText;
+		//____________________________________________
+
+		updateClickSaveEvents();
+
+	  	alert("El archivo se abrio correctamente");
+    };
+ 
+   reader.readAsText(input.files[0]);
+};
+//____________________________________________________________________________________
+
+
+
 /**
  Eventos de click sobre campos para habilitar boton de guardar
  */
+var updateClickSaveEvents = function()
+{
 $('#tableResources').on('click', function (event) {
   if (event.target != this) {
 	if(event.target.tagName=="INPUT" || event.target.tagName=="BUTTON")
@@ -249,8 +333,10 @@ $('#tableAlarms').on('click', function (event) {
 		view.enableButtonById("btnSaveAl");
   } 
 });
+};
+
 //__________________________________________________________________
 
 
-
+updateClickSaveEvents();
 view.disableSaveButtons();
